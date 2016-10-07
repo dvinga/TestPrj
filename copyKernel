@@ -14,7 +14,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
  * more details.
  */
-
+//new line 
 #include <linux/badblocks.h>
 #include <linux/seqlock.h>
 #include <linux/device.h>
@@ -224,9 +224,7 @@ int badblocks_set(struct badblocks *bb, sector_t s, int sectors,
 		/* 'hi' points to the first range that starts after 's'.
 		 * Maybe we can merge with the start of that range
 		 */
-		sector_t a = BB_OFFSET(p[hi]);
-		sector_t e = a + BB_LEN(p[hi]);
-		int ack = BB_ACK(p[hi]);
+		
 
 		if (a <= s + sectors) {
 			/* merging is possible */
@@ -381,8 +379,7 @@ int badblocks_clear(struct badblocks *bb, sector_t s, int sectors)
 			/* This range does overlap */
 			if (BB_OFFSET(p[lo]) < s) {
 				/* Keep the early parts of this range. */
-				int ack = BB_ACK(p[lo]);
-				sector_t start = BB_OFFSET(p[lo]);
+				
 
 				p[lo] = BB_MAKE(start, s - start, ack);
 				/* now low doesn't overlap, so.. */
@@ -517,7 +514,10 @@ ssize_t badblocks_store(struct badblocks *bb, const char *page, size_t len,
 	}
 
 	if (badblocks_set(bb, sector, length, !unack))
-		return -ENOSPC;
+	{	return -ENOSPC;
+	size_t len;
+	int i;
+	}
 	else
 		return len;
 }
